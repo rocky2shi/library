@@ -103,6 +103,7 @@ history:
  2010-05-21: v0.2，增加MatchOneKey()、MatchAllKey()接口；
  2010-05-21: v0.3，修改MultiStringMatch::MatchKey()中的int ch改为unsigned char ch；
  2011-05-05: v0.4，修改构造转换表的函数，加入忽略大小写查找（替换的没改）；
+ 2011-05-06: v0.5，修改大小写的一个bug：当主串中是小写，子串是大写时，找不到；
 
 
 ***/

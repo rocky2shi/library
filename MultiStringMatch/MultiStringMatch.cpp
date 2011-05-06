@@ -5,7 +5,7 @@
 namespace MULTISTRINGMATCH_SPACE
 {
 
-//#define _DEBUG 1
+#define _DEBUG 1
 
 
 #if _DEBUG
@@ -58,7 +58,7 @@ int MultiStringMatch::Init()
     NotMatchTable();
 
     // 输出各状态
-    //PrintStateTable();
+    PrintStateTable();
 }
 
 // 扫描m_from中各子串，构造各状态转换表；
@@ -125,9 +125,13 @@ void MultiStringMatch::MarkStateTable()
                 m_StateTable[ current ][ ch ] = next;
 
                 // 用于不区分大小写操作时
-                if( m_bIgnoreCase && isupper(ch) )
+                if( m_bIgnoreCase )
                 {
-                    int c = tolower(ch);
+                    /* 把字符ch对应的大写或小写同时记录到转换表，及
+                     * 字母出现表；这样，对不区分大小写的操作将花一
+                     * 倍内存；
+                     */
+                    int c = isupper(ch) ? tolower(ch) : toupper(ch);
                     m_StateTable[ current ][ c ] = next;
                     m_CharTable[c] = 1; // 标记出现的字符
                 }
